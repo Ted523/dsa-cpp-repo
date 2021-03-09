@@ -122,6 +122,9 @@ int main()
 		cin>>option;
 		switch(option)
 		{
+			case 0: 
+				break;
+			
 			case 1: // Push operation implementation
 				cout<<"Enter an item to push in the stack"<<endl;
 				cin>>value;
