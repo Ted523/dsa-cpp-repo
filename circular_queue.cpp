@@ -3,15 +3,17 @@
 
 using namespace std;
 
-class Queue{
+class CircularQueue{
 	private: 
 		int front;
 		int rear;
 		int arr[5];
+		int itemCount;
 		
 	public:
-	Queue()
+	CircularQueue()
 	{
+		itemCount=0;
 		front = -1;
 		rear = -1;
 		for(int i=0;i<5;i++)
@@ -30,7 +32,7 @@ class Queue{
 	
 	bool isFull()
 	{
-		if(rear==4)
+		if((rear+1)%5==front)
 			return true;
 		else
 			return false; 
@@ -51,9 +53,11 @@ class Queue{
 		}
 		else
 		{
-			rear++;
+			rear = (rear+1)%5;
 			arr[rear]=val;
 		}
+		
+		itemCount++;
 	}
 	
 	int dequeue()
@@ -71,20 +75,22 @@ class Queue{
 			arr[front] = 0;
 			rear = -1;
 			front = -1;
+			itemCount--;
 			return x;
 		}
 		else
 		{
 			x = arr[front];
 			arr[front] = 0;
-			front++;
+			front = (front+1)%5;
+			itemCount--;
 			return x; 
 		}
 	}
 	
 	int count()
 	{
-		return (rear-front+1);
+		return (itemCount);
 	}
 	
 	void display()
@@ -100,7 +106,7 @@ class Queue{
 
 int main(){
 	
-	Queue q1;
+	CircularQueue q1;
 	int option;
 	int value; 
 	
